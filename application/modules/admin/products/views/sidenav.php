@@ -1,0 +1,3 @@
+<a class="btn btn-custon-rounded-three btn-success" href="<?php echo bildourl('update-product/'.$this->uri->segment('3'));?>">Details</a>
+<a class="btn btn-custon-rounded-three btn-success" href="<?php echo bildourl('update-Prices/'.$this->uri->segment('3'));?>">Prices</a>
+<a class="btn btn-custon-rounded-three btn-success" href="<?php echo bildourl('update-images/'.$this->uri->segment('3'));?>">Images</a>

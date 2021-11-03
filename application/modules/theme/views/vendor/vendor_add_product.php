@@ -1,0 +1,218 @@
+<div class="page-header-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between justify-content-md-start">
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url();?>">Home</a></li>
+                    <li><span>/</span></li>
+                    <li>Vendor Add Products</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="dashboard-nav" class="dashboard-section">
+    <div class="container">
+       <?php $this->load->view("vendor_dashboard");?>
+    </div>
+    <div class="container">
+        <div class="dashboard-body">
+            <div class="profile">
+                <div class="profile-address-book">
+                    <h5 class="title mb-5">Vendor Add Product</h5>
+                    <form action="" method="post" class="formvalid container" id="" novalidate=""  enctype="multipart/form-data" >  
+                            <?php $this->load->view("theme/success_error");?>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Category <span class="required text-danger">*</span></label>
+                                        <select class="form-control vendorproduct_category" name="category" id="category_id" required="">
+                                           <option value="">Select Category</option>
+                                           <?php  
+                                            if(count($res) > 0){
+                                                foreach ($res as $re){  
+                                                ?>
+                                                <option value="<?php echo $re->category_id?>"><?php echo $re->category_name;?></option>
+                                                <?php
+                                                }
+                                            }
+                                           ?>
+                                        </select>
+                                        Category not listed ? <a data-toggle="modal" data-target="#categoryForm" href="javscript:void(0)">Create Category</a>
+                                        <?php echo form_error('category');?>
+                                     </div>
+                                </div>
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label>Sub Category <span class="required text-danger">*</span></label>
+                                          <select class="form-control vendorproduct_subcategory" name="sub_category" id="subcategory_name" required="">
+                                             <option value="">Select Sub Category</option>
+                                             <?php  
+                                             if(count($result) > 0){
+                                                 foreach ($result as $res){  
+                                                     ?>
+                                             <option value="<?php echo $res->subcategory_id?>"><?php echo $res->subcategory_name ?></option>
+                                                     <?php
+                                                 }
+                                             }
+                                             ?>
+                                           </select>
+                                           Sub Category not listed ? <a  data-toggle="modal" data-target="#subcategoryForm" href="javscript:void(0)">Create Sub Category</a>
+                                          <?php echo form_error('sub_category');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label>Product Name <span class="required text-danger">*</span></label> 
+                                          <input type="hidden" class="form-control product_name" name="product_name" id="FilterTextBoxval" >
+                                          <input type="hidden" name="vendor_mobile" value="<?php echo $this->session->userdata("vendor_mobile");?>"/>
+                                          <input type="text" class="form-control vendorproduct_product" id="FilterTextBox"  name="vendorproduct_product" placeholder="Product Name" onkeyup="autoproduct(jQuery(this))" required="" value="<?php echo set_value('vendorproduct_product');?>"/> 
+                                          <?php echo form_error('vendorproduct_product');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label>Product Description <span class="required text-danger">*</span></label>
+                                          <textarea name="vendorproduct_description" id="vendorproduct_description" class="form-control" required placeholder="Product Description"></textarea>
+                                         <?php echo form_error('vendorproduct_description');?>
+                                    </div>
+                                </div>
+                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label>Product Model <span class="required text-danger">*</span></label>
+                                          <input type="text" class="form-control vendorproduct_model" name="vendorproduct_model" id="vendorproduct_model" required="" placeholder="Product Model">
+                                          <?php echo form_error('vendorproduct_model');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                          <label>Product Brand <span class="required text-danger">*</span></label>
+                                          <input type="text" class="form-control vendorproduct_brand" name="vendorproduct_brand" id="vendorproduct_brand" required="" placeholder="Product Brand">
+                                          <?php echo form_error('vendorproduct_brand');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                         <label>Quantity <span class="required text-danger">*</span></label>
+                                       <input type="text" name="vendorproduct_bb_quantity" class="quantivendorproduct_bb_quantityty form-control" id="quantity" placeholder="Quantity"  >
+                                        <?php echo form_error('vendorproduct_bb_quantity');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Price<span class="required text-danger">*</span></label>
+                                        <input type="text" name="vendorproduct_bb_price" class="vendorproduct_bb_price form-control" id="price"  placeholder="Price">
+                                        <?php echo form_error('vendorproduct_bb_price');?>
+                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                         <label>MRP<span class="required text-danger">*</span></label>
+                                        <input type="text" name="vendorproduct_bb_mrp" class="vendorproduct_bb_mrp form-control" id="MRP" placeholder="MRP" >
+                                         <?php echo form_error('vendorproduct_bb_mrp');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                      <label>Measure<span class="required text-danger">*</span></label>
+                                       <select class="form-control vendorproduct_bb_measure" name="vendorproduct_bb_measure" id="measure" required="">
+                                             <option value="">Select Measure</option>
+                                             <?php  
+                                             if(count($measure) > 0){
+                                                 foreach ($measure as $me){  
+                                                     ?>
+                                             <option value="<?php echo $me->measure_id?>"><?php echo $me->measure_unit ?></option>
+                                                     <?php
+                                                 }
+                                             }
+                                             ?>
+                                           </select>
+                                         <?php echo form_error('vendorproduct_bb_measure');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                         <label>Min Quantity <span class="required text-danger">*</span></label>
+                                       <input type="text" name="vendorproduct_bc_quantity" class="vendorproduct_bc_quantity form-control" id="min_quantity" placeholder="Min. Quantity"  >
+                                        <?php echo form_error('vendorproduct_bc_quantity');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                           <label>Price<span class="required text-danger">*</span></label>
+                                      <input type="text" name="vendorproduct_bc_price" class="vendorproduct_bc_price form-control" id="min_price"  placeholder="Price">
+                                       <?php echo form_error('vendorproduct_bc_price');?>
+                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                         <label>MRP<span class="required text-danger">*</span></label>
+                                        <input type="text" name="vendorproduct_bc_mrp" class="vendorproduct_bc_mrp form-control" id="MRP" placeholder="MRP" >
+                                         <?php echo form_error('vendorproduct_bc_mrp');?>
+                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                      <label>Measure<span class="required text-danger">*</span></label>
+                                       <select class="form-control vendorproduct_bc_measure" name="vendorproduct_bc_measure" id="measure" required="">
+                                             <option value="">Select Measure</option>
+                                             <?php  
+                                             if(count($measure) > 0){
+                                                 foreach ($measure as $me){  
+                                                     ?>
+                                             <option value="<?php echo $me->measure_id?>"><?php echo $me->measure_unit ?></option>
+                                                     <?php
+                                                 }
+                                             }
+                                             ?>
+                                           </select>
+                                         <?php echo form_error('vendorproduct_bc_measure');?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Shipping <span class="required text-danger">*</span></label>
+                                        <div>
+                                            <input type="radio" name="vendorproduct_shipping" <?php echo set_radio('vendorproduct_shipping','Yes');?> class="vendorproduct_shipping" value="Yes" > Yes
+                                            <input type="radio" name="vendorproduct_shipping" <?php echo set_radio('vendorproduct_shipping','No');?> class="vendorproduct_shipping" value="No" > No
+                                        </div>    
+                                        <?php echo form_error('vendorproduct_shipping');?>
+                                     </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tax Class <span class="required text-danger">*</span></label> 
+                                        <div>
+                                           <input type="radio" name="vendorproduct_tax_class" class="vendorproduct_tax_class" value="Taxable" > Taxable
+                                           <input type="radio" name="vendorproduct_tax_class" class="vendorproduct_tax_class" value="Non-Taxable" > Non-Taxable
+                                        </div>
+                                        <?php echo form_error('vendorproduct_tax_class');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Product Image <span class="required text-danger">*</span></label>
+                                        <input type="file" name="product_upload[]" multiple="" class="form-control product_upload"  required="" accept=".jpg,.png,.gif,.jpeg" multiple=""/>
+                                        <?php echo form_error('product_upload[]');?>
+                                   </div>
+                                </div>
+                            </div>   
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <input type="submit" class="btn btn-custon-rounded-three btn-primary" name="submit" value="Submit">
+                                </div>
+                             </div>
+                      </form>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
